@@ -14,9 +14,11 @@ class MainForm extends Component{
             lastName: null,
             email: null,
         },
-        age: '',
-        city: '',
-        country: ''
+        personalDetails:{
+            age: null,
+            city: null,
+            country: null
+        }
     }
 
     nextStep = () =>{
@@ -43,6 +45,14 @@ class MainForm extends Component{
         console.log(this.state.userDetails)
     }
 
+    personalDetailHandle = e =>{
+        this.setState({
+            personalDetails: Object.assign(this.state.personalDetails, {age: e.age}),
+            personalDetails: Object.assign(this.state.personalDetails, {city: e.city}),
+            personalDetails: Object.assign(this.state.personalDetails, {country: e.country})
+        })
+    }
+
     handleChange = input => event => {
         this.setState({
             [input] : event.target.value 
@@ -52,13 +62,13 @@ class MainForm extends Component{
     render(){
         const { step } = this.state
         const { firstName, lastName, email} = this.state.userDetails
-        const { age, city, country } = this.state
+        const { age, city, country } = this.state.personalDetails
         const values = { firstName, lastName, email, age, city, country }
         switch(step){
             case 1: 
                 return <UserDetails nextStep={this.nextStep} userDetailsHandle={this.userDetailsHandle.bind(this)} values={ values }/>
             case 2:
-                return <PersonalDetails nextStep={this.nextStep} prevStep={this.prevStep} handleChange={this.handleChange} values={values} />
+                return <PersonalDetails nextStep={this.nextStep} prevStep={this.prevStep} personalDetailHandle={this.personalDetailHandle.bind(this)} values={values} />
             case 3: 
                 return <Confirmation nextStep={this.nextStep} prevStep={this.prevStep} handleChange={this.handleChange} values={values} />
             case 4:

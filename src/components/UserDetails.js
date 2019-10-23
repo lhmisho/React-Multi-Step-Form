@@ -12,6 +12,7 @@ class UserDetails extends React.Component {
         emailError: false
     }
 
+    // methods for handle inputs
     handleFirstName = e =>{
         // console.log(e.target.value)
         this.setState({
@@ -31,8 +32,11 @@ class UserDetails extends React.Component {
             emailError: false
         })
     }
+
+    // handling the submit
     submitHandler = e =>{
         e.preventDefault()
+        // first checking the validation than else condition doing submit procidure
         if(this.state.firstName.length < 1){
             this.setState({
                 firstNameError: true
@@ -65,7 +69,12 @@ class UserDetails extends React.Component {
                 <h1 className="ui centered">Enter User Details</h1>
                 <Form.Field>
                     <label>First Name</label>
-                    <input placeholder='First Name' name='firstName' onChange={this.handleFirstName.bind(this)} defaultValue={values.firstName} />
+                    <input 
+                        placeholder='First Name' 
+                        name='firstName' 
+                        onChange={this.handleFirstName.bind(this)} 
+                        defaultValue={values.firstName} 
+                    />
                     {this.state.firstNameError && <p className="text-danger">First Name is required</p>}
                 </Form.Field>
                 <Form.Field>
